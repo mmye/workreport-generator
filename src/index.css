@@ -2,10 +2,10 @@
 
 @theme {
   --font-sans: "Inter", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
-  
+
   --color-primary: var(--color-slate-700);
   --color-primary-foreground: var(--color-slate-50);
-  
+
   --color-error: var(--color-red-600);
   --color-warning: var(--color-amber-500);
   --color-info: var(--color-blue-600);
@@ -29,8 +29,11 @@
 
 body {
   margin: 0;
-  display: flex;
-  place-items: flex-start; /* Changed from center */
-  min-width: 320px;
+  width: 100%;
   min-height: 100vh;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
 }

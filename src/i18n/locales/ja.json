@@ -1,0 +1,62 @@
+{
+    "app": {
+        "title": "作業報告書",
+        "version": "v1.2",
+        "create": "レポート作成",
+        "search": "レポートを検索...",
+        "logout": "ログアウト",
+        "settings": "設定",
+        "status": {
+            "all": "ステータス: すべて",
+            "draft": "下書き",
+            "review": "確認中",
+            "final": "完了"
+        },
+        "table": {
+            "id": "レポートID",
+            "date": "日付",
+            "client_desc": "顧客 / 内容",
+            "status": "ステータス",
+            "actions": "操作",
+            "no_reports": "条件に一致するレポートが見つかりませんでした。",
+            "clear_selection": "サイドバーの選択を解除してみてください。"
+        }
+    },
+    "nav": {
+        "assets": "資産管理",
+        "all_clients": "すべての顧客"
+    },
+    "modal": {
+        "title": "新規レポート作成",
+        "step": "ステップ {{current}} / {{total}}",
+        "step1_label": "顧客を選択",
+        "step2_label": "工場 / 拠点を選択",
+        "step3_label": "機械を選択",
+        "choose_client": "-- 顧客を選択 --",
+        "choose_factory": "-- 工場を選択 --",
+        "choose_machine": "-- 機械を選択 --",
+        "create_new_client": "+ 新しい顧客を作成",
+        "create_new_factory": "+ 新しい工場を作成",
+        "create_new_machine": "+ 新しい機械を作成",
+        "enter_client_name": "顧客名を入力",
+        "enter_factory_name": "工場名を入力",
+        "enter_machine_name": "機械名を入力",
+        "new_client_hint": "新しい顧客のため、工場名を入力してください。",
+        "new_factory_hint": "新しい拠点が選択されました。機械名を入力してください。",
+        "cancel": "キャンセル",
+        "back": "戻る",
+        "next": "次へ",
+        "create": "作成する",
+        "client": "顧客:",
+        "location": "場所:"
+    },
+    "machine_card": {
+        "manufacturer": "メーカー",
+        "serial": "モデル / シリアル",
+        "location": "設置場所",
+        "client": "顧客",
+        "active": "稼働中",
+        "view_specs": "仕様を見る",
+        "history": "履歴"
+    }
+}

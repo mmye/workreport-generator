@@ -1,0 +1,62 @@
+{
+    "app": {
+        "title": "Work Reports",
+        "version": "v1.2",
+        "create": "Create Report",
+        "search": "Search reports...",
+        "logout": "Logout",
+        "settings": "Settings",
+        "status": {
+            "all": "All Status",
+            "draft": "Draft",
+            "review": "Review",
+            "final": "Final"
+        },
+        "table": {
+            "id": "Report ID",
+            "date": "Date",
+            "client_desc": "Client / Description",
+            "status": "Status",
+            "actions": "Actions",
+            "no_reports": "No reports found matching your criteria.",
+            "clear_selection": "Try clearing the sidebar selection."
+        }
+    },
+    "nav": {
+        "assets": "Assets",
+        "all_clients": "All Clients"
+    },
+    "modal": {
+        "title": "Create New Report",
+        "step": "Step {{current}} of {{total}}",
+        "step1_label": "Select Client",
+        "step2_label": "Select Factory / Location",
+        "step3_label": "Select Machine",
+        "choose_client": "-- Choose Client --",
+        "choose_factory": "-- Choose Factory --",
+        "choose_machine": "-- Choose Machine --",
+        "create_new_client": "+ Create New Client",
+        "create_new_factory": "+ Create New Factory",
+        "create_new_machine": "+ Create New Machine",
+        "enter_client_name": "Enter Client Name",
+        "enter_factory_name": "Enter Factory Name",
+        "enter_machine_name": "Enter Machine Name",
+        "new_client_hint": "Since this is a new client, please enter the factory name.",
+        "new_factory_hint": "New location selected. Please enter the machine name.",
+        "cancel": "Cancel",
+        "back": "Back",
+        "next": "Next",
+        "create": "Create Report",
+        "client": "Client:",
+        "location": "Location:"
+    },
+    "machine_card": {
+        "manufacturer": "Manufacturer",
+        "serial": "Model / Serial",
+        "location": "Location",
+        "client": "Client",
+        "active": "Active",
+        "view_specs": "View Specs",
+        "history": "History"
+    }
+}
