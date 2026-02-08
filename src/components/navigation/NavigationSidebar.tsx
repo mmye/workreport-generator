@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useReportStore } from '../../store/useReportStore';
 import type { ReportData } from '../../store/useReportStore';
 import { useNavigationStore } from '../../store/useNavigationStore';
@@ -17,11 +17,11 @@ const NavigationSidebar: React.FC = () => {
     const { data } = useReportStore();
     const {
         isSidebarOpen,
-        viewMode,
+        // viewMode,
         expandedSections,
         activeSectionId,
         filterMode,
-        toggleSidebar,
+        // toggleSidebar, // Unused
         setViewMode,
         toggleSection,
         expandAll,
@@ -50,7 +50,7 @@ const NavigationSidebar: React.FC = () => {
 
     const handleExpandAll = () => expandAll(allIds);
 
-    const renderTaskItem = (task: any, sectionKey: string, level: number = 0) => {
+    const renderTaskItem = (task: any) => {
         const status = getTaskStatus(task, 'parent');
         if (filterMode === 'incomplete' && status === 'complete') return null;
 
@@ -117,7 +117,7 @@ const NavigationSidebar: React.FC = () => {
                 {isExpanded && (
                     <div className="mt-1 space-y-1">
                         {tasks.length === 0 && <div className="text-xs text-slate-400 pl-4 py-1">No tasks</div>}
-                        {tasks.map(task => renderTaskItem(task, dataKey))}
+                        {tasks.map(task => renderTaskItem(task))}
                     </div>
                 )}
             </div>

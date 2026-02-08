@@ -53,7 +53,7 @@ const PreviewModal: React.FC<PreviewModalProps> = ({ isOpen, onClose }) => {
                         {/* Overview (Mock Data mapping) */}
                         <section className="mb-6">
                             <h2 className="text-base font-bold bg-gray-100 p-2 mb-2 border-l-4 border-blue-500">1. Overview</h2>
-                            <p className="whitespace-pre-wrap">{data.chapter1_overview || "No overview provided."}</p>
+                            <p className="whitespace-pre-wrap">{data.overview.purpose || "No overview provided."}</p>
                         </section>
 
                         {/* Inspection */}

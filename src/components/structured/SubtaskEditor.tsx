@@ -1,6 +1,9 @@
 import React from 'react';
 import { useReportStore } from '../../store/useReportStore';
-import type { ReportData, Subtask } from '../../store/useReportStore';
+import type { ReportData, Subtask, Part } from '../../store/useReportStore';
+import { useState } from 'react';
+import ImageCropperModal from '../import/ImageCropperModal';
+import type { ExtractedPart } from '../../utils/anthropic';
 
 interface SubtaskEditorProps {
     section: keyof Pick<ReportData, 'inspectionTasks' | 'abnormalityTasks' | 'verificationTasks'>;
@@ -9,7 +12,25 @@ interface SubtaskEditorProps {
 }
 
 const SubtaskEditor: React.FC<SubtaskEditorProps> = ({ section, parentId, subtasks }) => {
+
     const { addSubtask, removeSubtask, updateSubtask, duplicateTask } = useReportStore();
+    const [importTarget, setImportTarget] = useState<{ subtaskId: string } | null>(null);
+
+    const handleImportParts = (parts: ExtractedPart[]) => {
+        if (!importTarget) return;
+
+        // Merge with existing parts or replace? Usually append.
+        // We need to fetch the current subtask to append.
+        // But here we can use the updateSubtask with a callback or just find it in props.
+        // The props `subtasks` are fresh from store if parent re-renders.
+
+        const targetSubtask = subtasks.find(s => s.id === importTarget.subtaskId);
+        if (!targetSubtask) return;
+
+        const newParts: Part[] = [...targetSubtask.parts, ...parts];
+        updateSubtask(section, parentId, importTarget.subtaskId, 'parts', newParts);
+        setImportTarget(null);
+    };
 
     return (
         <div className="space-y-6 pl-4 border-l-2 border-slate-200">
@@ -79,9 +100,19 @@ const SubtaskEditor: React.FC<SubtaskEditorProps> = ({ section, parentId, subtas
                         {subtask.parts.length > 0 ? (
                             <ul className="text-sm space-y-1 mb-2">
                                 {subtask.parts.map(p => (
-                                    <li key={p.id} className="flex justify-between border-b border-slate-100 pb-1">
-                                        <span>{p.name}</span>
-                                        <span className="text-slate-500">x{p.quantity}</span>
+                                    <li key={p.id} className="border-b border-slate-100 pb-2">
+                                        <div className="flex justify-between font-medium">
+                                            <span>{p.name}</span>
+                                            <span className="text-slate-500">x{p.quantity}</span>
+                                        </div>
+                                        {/* Render dynamic fields */}
+                                        {Object.keys(p).filter(k => !['id', 'name', 'quantity'].includes(k)).length > 0 && (
+                                            <div className="text-xs text-slate-400 mt-1 grid grid-cols-2 gap-x-2">
+                                                {Object.keys(p).filter(k => !['id', 'name', 'quantity'].includes(k)).map(key => (
+                                                    <span key={key}><span className="font-semibold">{key}:</span> {String(p[key])}</span>
+                                                ))}
+                                            </div>
+                                        )}
                                     </li>
                                 ))}
                             </ul>
@@ -89,6 +120,13 @@ const SubtaskEditor: React.FC<SubtaskEditorProps> = ({ section, parentId, subtas
                         <div className="flex gap-2">
                             <input type="text" placeholder="Search parts..." className="flex-1 text-xs border border-slate-200 rounded px-2 py-1" />
                             <button className="text-xs bg-slate-100 hover:bg-slate-200 px-3 py-1 rounded text-slate-600">Add</button>
+                            <button
+                                onClick={() => setImportTarget({ subtaskId: subtask.id })}
+                                className="text-xs bg-indigo-50 hover:bg-indigo-100 text-indigo-600 px-3 py-1 rounded flex items-center gap-1"
+                                title="Import from Image/PDF"
+                            >
+                                <span>📷</span> Import
+                            </button>
                         </div>
                     </div>
 
@@ -120,7 +158,14 @@ const SubtaskEditor: React.FC<SubtaskEditorProps> = ({ section, parentId, subtas
             >
                 <span>+</span> Add Subtask
             </button>
-        </div>
+
+
+            <ImageCropperModal
+                isOpen={!!importTarget}
+                onClose={() => setImportTarget(null)}
+                onImport={handleImportParts}
+            />
+        </div >
     );
 };
 

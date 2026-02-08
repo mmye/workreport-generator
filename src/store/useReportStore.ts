@@ -16,6 +16,7 @@ export interface Part {
     id: string;
     name: string;
     quantity: number;
+    [key: string]: any;
 }
 
 export interface Measurement {
@@ -172,7 +173,7 @@ const MOCK_SUGGESTIONS: Suggestion[] = [
 
 // --- Store Implementation ---
 
-export const useReportStore = create<ReportStore>((set, get) => ({
+export const useReportStore = create<ReportStore>((set) => ({
     data: INITIAL_DATA,
 
     updateOverview: (field, value) =>

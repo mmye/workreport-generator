@@ -5,7 +5,7 @@ import { useSettingsStore } from '../store/useSettingsStore';
 
 // Mock function to simulate PDF generation from Word
 // In a real app, this would send the docx buffer to a backend server for conversion
-const convertDocxToPdf = async (docxBuffer: Uint8Array): Promise<Blob> => {
+const convertDocxToPdf = async (docxBuffer: Uint8Array | any): Promise<Blob> => {
     console.log("Mocking PDF conversion server call...");
     await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate latency
     return new Blob([docxBuffer], { type: 'application/pdf' }); // Returning docx as PDF for prototype
@@ -24,7 +24,7 @@ export const generateWordReport = async () => {
         const templateBuffer = await wordTemplate.arrayBuffer();
 
         const report = await createReport({
-            template: templateBuffer,
+            template: new Uint8Array(templateBuffer),
             data: {
                 report_id: 'R-2025-001', // Mock ID
                 date: new Date().toLocaleDateString(),
@@ -34,7 +34,7 @@ export const generateWordReport = async () => {
             cmdDelimiter: ['{{', '}}'], // Standard mustache style
         });
 
-        saveAs(new Blob([report]), `WorkReport_${new Date().toISOString().split('T')[0]}.docx`);
+        saveAs(new Blob([report as any]), `WorkReport_${new Date().toISOString().split('T')[0]}.docx`);
     } catch (error) {
         console.error("Word Generation Error:", error);
         alert("Failed to generate Word report. Check console for details.");
@@ -55,7 +55,7 @@ export const generatePdfReport = async () => {
 
         // 1. Generate Word first (server needs the filled docx)
         const wordBuffer = await createReport({
-            template: templateBuffer,
+            template: new Uint8Array(templateBuffer),
             data: {
                 report_id: 'R-2025-001',
                 date: new Date().toLocaleDateString(),

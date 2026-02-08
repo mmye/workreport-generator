@@ -3,7 +3,7 @@ import { useReportsListStore } from '../store/useReportsListStore';
 import type { ReportStatus } from '../store/useReportsListStore';
 import { useAuthStore } from '../store/useAuthStore';
 import { useMasterStore } from '../store/useMasterStore';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ResourceSidebar from '../components/navigation/ResourceSidebar';
 import MachineInfoCard from '../components/dashboard/MachineInfoCard';
 import NewReportModal from '../components/report/NewReportModal';
@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 const ReportsListPage: React.FC = () => {
     const { t } = useTranslation();
     const { user, logout } = useAuthStore();
-    const navigate = useNavigate();
+    // const navigate = useNavigate(); // Unused
     const {
         reports,
         searchQuery,
@@ -22,7 +22,7 @@ const ReportsListPage: React.FC = () => {
         setStatusFilter,
         deleteReport,
         duplicateReport,
-        createReport // used implicitly
+        // createReport // used implicitly
     } = useReportsListStore();
 
     const { selectedClientId, selectedMachineId } = useMasterStore();
